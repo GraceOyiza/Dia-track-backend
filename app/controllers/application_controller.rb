@@ -11,7 +11,7 @@ class ApplicationController < ActionController::API
 
   def handle_validation(err)
     messages = {}
-    err.record.errors.each_key do |key|
+    err.record.errors.messages.each_key do |key|
       messages[key] = err.record.errors[key] unless messages[key]
     end
     render json: { errors: messages }, status: 422

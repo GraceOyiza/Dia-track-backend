@@ -55,4 +55,111 @@ RSpec.describe 'Api::V1::Readings', type: :request do
       expect(json['errors']['date']).to include("can't be blank")
     end
   end
+
+  context 'Get All Readings' do
+    let(:headers) { generate_headers }
+    let(:user) { create :user }
+    let(:url) { api_v1_readings_path }
+    let(:no_headers_url) { get url }
+
+    context 'Authenticate User' do
+      it 'return 401 if token is not in headers' do
+        no_headers_url
+        expect(response.status).to eq(401)
+      end
+
+      it 'return 401 if uid is not in headers' do
+        no_headers_url
+        expect(response.status).to eq(401)
+      end
+
+      it 'return 401 if client is not in headers' do
+        no_headers_url
+        expect(response.status).to eq(401)
+      end
+    end
+
+    context 'Valid Header' do
+      it 'should return all readings' do
+        get url, headers: headers
+        body = JSON.parse(response.body)
+
+        expect(response.status).to eq(200)
+        expect(body).to be_instance_of Array
+        body.each do |reading|
+          expect(reading).to include(params)
+        end
+      end
+    end
+  end
+
+  context 'Update Reading' do
+    let(:user) { create :user }
+    let(:reading) { create :reading, user: user }
+    let(:headers) { generate_headers(user) }
+    let(:url) { api_v1_reading_path(reading.id) }
+    let(:no_headers_url) { patch url }
+
+    context 'Authenticate User' do
+      it 'return 401 if token is not in headers' do
+        no_headers_url
+        expect(response.status).to eq(401)
+      end
+
+      it 'return 401 if uid is not in headers' do
+        no_headers_url
+        expect(response.status).to eq(401)
+      end
+
+      it 'return 401 if client is not in headers' do
+        no_headers_url
+        expect(response.status).to eq(401)
+      end
+    end
+
+    context 'Valid Header' do
+      it 'should return all readings' do
+        params = {
+          fasting: 88.00
+        }
+        patch url, headers: headers, params: params
+        body = JSON.parse(response.body)
+
+        expect(response.status).to eq(200)
+        expect(body['fasting'].to_f).to be(params[:fasting])
+      end
+    end
+  end
+
+  context 'Delete Reading' do
+    let(:user) { create :user }
+    let(:reading) { create :reading, user: user }
+    let(:headers) { generate_headers(user) }
+    let(:url) { api_v1_reading_path(reading.id) }
+    let(:no_headers_url) { delete url }
+
+    context 'Authenticate User' do
+      it 'return 401 if token is not in headers' do
+        no_headers_url
+        expect(response.status).to eq(401)
+      end
+
+      it 'return 401 if uid is not in headers' do
+        no_headers_url
+        expect(response.status).to eq(401)
+      end
+
+      it 'return 401 if client is not in headers' do
+        no_headers_url
+        expect(response.status).to eq(401)
+      end
+    end
+
+    context 'Valid Header' do
+      it 'should delete a reading' do
+        delete url, headers: headers
+        expect(response.status).to eq(204)
+      end
+    end
+  end
 end

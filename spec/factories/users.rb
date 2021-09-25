@@ -12,24 +12,4 @@ FactoryBot.define do
     username { Faker::Name.unique.name }
     avatar { Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, 'spec/images/bubbles.jpg')), 'image/jpeg') }
   end
-
-  # factory :appointment do
-  #   attendee_id { 1 }
-  #   gym_session_id { 1 }
-  #   confirmed { false }
-  # end
-
-  # factory :gym_session do
-  #   association :instructor, factory: :trainer
-  #   title { 'Six Packs workout' }
-  #   description { 'Description' }
-  #   start_time { Time.now + 1000 }
-  #   duration { 60 * 30 }
-  # end
-
-  # factory :notification do
-  #   message { 'Notification message' }
-  #   receiver factory: :user
-  #   is_read { false }
-  # end
 end

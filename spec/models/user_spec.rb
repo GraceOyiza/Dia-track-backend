@@ -14,7 +14,6 @@ RSpec.describe User, type: :model do
 
       scenario { should validate_presence_of(:email) }
 
-      # scenario { should validate_presence_of(:username) }
       scenario { should validate_uniqueness_of(:username).case_insensitive }
       scenario { should validate_length_of(:username).is_at_least(3) }
       scenario { should validate_length_of(:username).is_at_most(50) }

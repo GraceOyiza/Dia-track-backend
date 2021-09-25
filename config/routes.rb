@@ -8,4 +8,5 @@ Rails.application.routes.draw do
       get '/me', to: "users#show"
     end
   end
+  get '*path', to: 'not_found#default'
 end

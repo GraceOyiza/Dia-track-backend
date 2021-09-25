@@ -13,18 +13,6 @@ FactoryBot.define do
     avatar { Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, 'spec/images/bubbles.jpg')), 'image/jpeg') }
   end
 
-  # factory :trainer, class: 'User' do
-  #   email { Faker::Internet.email }
-  #   first_name { Faker::Name.unique.name }
-  #   last_name { Faker::Name.unique.name }
-  #   password { 'Password1' }
-  #   username { Faker::Name.unique.name }
-  #   is_trainer { true }
-  #   speciality { 'Squats' }
-  #   info { '5 years experience as a professional trainer' }
-  #   image { Rack::Test::UploadedFile.new(File.open(File.join(Rails.root, 'spec/images/bubbles.jpg')), 'image/jpeg') }
-  # end
-
   # factory :appointment do
   #   attendee_id { 1 }
   #   gym_session_id { 1 }

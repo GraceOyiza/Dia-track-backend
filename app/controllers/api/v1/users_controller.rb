@@ -3,6 +3,6 @@ class Api::V1::UsersController < ApplicationController
 
   def show
     user = User.includes(:readings).find(current_api_v1_user.id)
-    render render_success(user)
+    render_success(user)
   end
 end

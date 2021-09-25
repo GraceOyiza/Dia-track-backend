@@ -3,6 +3,7 @@ class ApplicationController < ActionController::API
   before_action :configure_permitted_parameters, if: :devise_controller?
   rescue_from ActiveRecord::RecordInvalid, with: :handle_validation
   rescue_from ActiveSupport::MessageVerifier::InvalidSignature, with: :handle_message_verifier
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found_handler
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name username email password password_confirmation image])
@@ -30,5 +31,13 @@ class ApplicationController < ActionController::API
 
   def set_time_with_time_zone(time_zone, time = '')
     ActiveSupport::TimeZone[time_zone].parse(time)
+  end
+
+  def not_found_handler
+    errors = {
+      success: false,
+      error: 'User not found'
+    }
+    render json: errors, status: 404
   end
 end

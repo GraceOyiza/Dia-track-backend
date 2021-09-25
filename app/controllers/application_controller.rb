@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_handler
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name username email password password_confirmation image])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name username email password password_confirmation avatar])
   end
 
   def handle_validation(err)

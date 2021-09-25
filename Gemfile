@@ -6,6 +6,7 @@ ruby '3.0.2'
 gem 'devise_token_auth'
 gem 'figaro'
 gem 'active_model_serializers'
+gem 'cloudinary'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.0.4', '>= 6.0.4.1'
 # Use postgresql as the database for Active Record

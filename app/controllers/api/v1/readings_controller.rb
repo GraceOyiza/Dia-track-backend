@@ -1,6 +1,6 @@
 class Api::V1::ReadingsController < ApplicationController
   before_action :authenticate_api_v1_user!
-  before_action :set_reading, except: [:index, :create]
+  before_action :set_reading, except: %i[index create]
 
   def index
     render_success(current_api_v1_user.readings)

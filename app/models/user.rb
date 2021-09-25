@@ -19,6 +19,6 @@ class User < ActiveRecord::Base
                        uniqueness: { case_sensitive: false }
 
   def set_img_url
-    self.img_url = url_for(avatar)
+    self.img_url = url_for(avatar) if avatar.attached?
   end
 end

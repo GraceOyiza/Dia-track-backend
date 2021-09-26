@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       mount_devise_token_auth_for 'User', at: 'auth', defaults: { format: :json }
       resources :readings, defaults: { format: :json }
+      resources :measures, only: [:index, :create], defaults: { format: :json }
       get '/me', to: "users#show", defaults: { format: :json }
     end
   end

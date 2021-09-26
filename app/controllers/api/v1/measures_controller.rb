@@ -2,7 +2,7 @@ class Api::V1::MeasuresController < ApplicationController
   before_action :authenticate_api_v1_user!
 
   def index
-    measures = Measure.incldues(:measurement).where(user_id: current_api_v1_user.id)
+    measures = Measure.includes(:measurements).where(user_id: current_api_v1_user.id)
     render_success(measures)
   end
 

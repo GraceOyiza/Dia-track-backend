@@ -3,6 +3,7 @@ class CreateMeasurements < ActiveRecord::Migration[6.0]
     create_table :measurements do |t|
       t.references :measure
       t.float :value
+      t.datetime :date
       t.timestamps
     end
   end

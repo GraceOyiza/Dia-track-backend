@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2021_09_26_132644) do
   create_table "measurements", force: :cascade do |t|
     t.bigint "measure_id"
     t.float "value"
+    t.datetime "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["measure_id"], name: "index_measurements_on_measure_id"

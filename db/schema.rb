@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_25_031953) do
+ActiveRecord::Schema.define(version: 2021_09_26_125906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,14 @@ ActiveRecord::Schema.define(version: 2021_09_25_031953) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "measures", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "title", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_measures_on_user_id"
+  end
+
   create_table "readings", force: :cascade do |t|
     t.decimal "fasting", null: false
     t.decimal "after_meal", null: false
@@ -59,6 +67,11 @@ ActiveRecord::Schema.define(version: 2021_09_25_031953) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "username"

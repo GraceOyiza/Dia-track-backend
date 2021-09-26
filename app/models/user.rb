@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   has_many :readings
+  has_many :measures
   has_one_attached :avatar
 
   validates :first_name, presence: true, length: { minimum: 3, maximum: 50 }

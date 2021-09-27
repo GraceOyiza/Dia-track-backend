@@ -7,9 +7,9 @@ class Api::V1::MeasuresController < ApplicationController
   end
 
   def create
-    new_measure = current_api_v1_user.measures.create!(measure_params)
-
-    render_success(new_measure, 201)
+    current_api_v1_user.measures.create!(measure_params)
+    measures = Measure.includes(:measurements).where(user_id: current_api_v1_user.id)
+    render_success(measures, 201)
   end
 
   def show
@@ -31,7 +31,7 @@ class Api::V1::MeasuresController < ApplicationController
   private
 
   def measure_params
-    params.permit(:title)
+    params.permit(:title, :goal, :unit)
   end
 
   def measurement_params

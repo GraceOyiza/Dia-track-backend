@@ -8,7 +8,9 @@ RSpec.describe 'Api::V1::Measures', type: :request do
     let(:headers) { generate_headers(user) }
     before(:each) do
       params = {
-        title: 90.00
+        title: 90.00,
+        goal: 444,
+        unit: 'lbs'
       }
     end
 
@@ -22,8 +24,32 @@ RSpec.describe 'Api::V1::Measures', type: :request do
       expect(json['errors']['title']).to include("can't be blank")
     end
 
+    it 'should validate presence of goal' do
+      params[:goal] = nil
+      post_request(measures_url, params, headers)
+      json = JSON.parse(response.body)
+
+      expect(response.status).to eql(422)
+      expect(json['errors']).to have_key('goal')
+      expect(json['errors']['goal']).to include("can't be blank")
+    end
+
+    it 'should validate presence of unit' do
+      params[:unit] = nil
+      post_request(measures_url, params, headers)
+      json = JSON.parse(response.body)
+
+      expect(response.status).to eql(422)
+      expect(json['errors']).to have_key('unit')
+      expect(json['errors']['unit']).to include("can't be blank")
+    end
+
     it 'should create a measure' do
-      params[:tile] = 'Height'
+      params = {
+        title: 'Height',
+        goal: 300.0,
+        unit: 'kg'
+      }
       post_request(measures_url, params, headers)
       JSON.parse(response.body)
 

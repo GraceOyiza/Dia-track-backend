@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 2021_09_26_132644) do
   create_table "measures", force: :cascade do |t|
     t.bigint "user_id"
     t.string "title", null: false
+    t.float "goal", null: false
+    t.string "unit", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_measures_on_user_id"

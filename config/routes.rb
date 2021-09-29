@@ -1,3 +1,15 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  default_url_options :host => "http://localhost:3000"
+
+  namespace :api do
+    namespace :v1 do
+      mount_devise_token_auth_for 'User', at: 'auth', defaults: { format: :json }
+      resources :readings, defaults: { format: :json }
+      resources :measures, only: [:index, :create, :show], defaults: { format: :json }
+
+      post '/measures/:id/new', to: "measures#new_measurement", defaults: { format: :json }
+      get '/me', to: "users#show", defaults: { format: :json }
+    end
+  end
+  get '*path', to: 'not_found#default', defaults: { format: :json }
 end

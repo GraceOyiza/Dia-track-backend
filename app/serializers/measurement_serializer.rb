@@ -1,3 +1,3 @@
 class MeasurementSerializer < ActiveModel::Serializer
-  attributes :id, :value, :date, :updated_at
+  attributes :id, :value, :date
 end

@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_09_26_132644) do
     t.string "title", null: false
     t.float "goal", null: false
     t.string "unit", null: false
+    t.datetime "date_created", default: "2021-09-29 02:33:21", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_measures_on_user_id"
